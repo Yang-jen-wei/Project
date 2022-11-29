@@ -6,5 +6,5 @@
  *
  */
 module Final {
-	qqqq
+
 }
