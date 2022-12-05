@@ -77,6 +77,7 @@ public class Google
 				//System.out.println(citeUrl.substring(citeUrl.indexOf("https://")));
 				
 				//put title and pair into HashMap
+				citeUrl = "https://www.google.com/" + citeUrl;
 				retVal.put(title, citeUrl);
 
 			} catch (IndexOutOfBoundsException e) 

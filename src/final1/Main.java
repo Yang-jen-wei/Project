@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 
-
 public class Main {
 	public static void main(String[] args) throws IOException {
 		ArrayList<Keyword> keywords = new ArrayList<Keyword>();
@@ -41,7 +40,7 @@ public class Main {
 		keywords.add(k14);
 		keywords.add(k15);
 		//root node
-			
+
 		//WebTree tree = new WebTree(rootPage);
 		
 		//build childnode
@@ -53,12 +52,15 @@ public class Main {
 		ArrayList<String> urlset = new ArrayList<String>();
 		HashMap<String,String> url=new HashMap<String,String>();
 		url=(HashMap<String, String>) new Google(searchkeywords).query();
+
 		for(var v : url.keySet()) {
 			String u = url.get(v);
-			u = u.substring(u.indexOf("https://"));
 			urlset.add(u);
-			}
-		//System.out.println(urlset.get(2));	
+		}
+		WebPage webpage=new WebPage(urlset.get(0),keywords.get(1).name);
+		webpage.setScore(keywords);
+		System.out.println(webpage.score);
+
 		
 		scanner.close();
 
