@@ -57,9 +57,14 @@ public class Main {
 			String u = url.get(v);
 			urlset.add(u);
 		}
-		WebPage webpage=new WebPage(urlset.get(0),keywords.get(1).name);
+		/*ArrayList<Double> count = new ArrayList<Double>();
+		for(int i=0;i<urlset.size();i++) {
+		WebPage webpage=new WebPage(urlset.get(i),);
 		webpage.setScore(keywords);
-		System.out.println(webpage.score);
+		count.add(webpage.score);
+
+		}
+		System.out.println(count);*/
 
 		
 		scanner.close();
