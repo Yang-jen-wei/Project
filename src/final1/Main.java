@@ -1,5 +1,6 @@
 package final1;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,13 +18,13 @@ public class Main {
 		Keyword k6 = new Keyword("告示牌",3);
 		Keyword k7 = new Keyword("歌曲",4);
 		Keyword k8 = new Keyword("新歌",3);
-		Keyword k9 = new Keyword("吳亦凡",2);
-		Keyword k10 = new Keyword("王力宏",2);
-		Keyword k11 = new Keyword("Kanye West",2);
+		Keyword k9 = new Keyword("鋼琴",2);
+		Keyword k10 = new Keyword("樂器",2);
+		Keyword k11 = new Keyword("旋律",2);
 		Keyword k12 = new Keyword("藝人",3);
-		Keyword k13 = new Keyword("大野雄大",3);
-		Keyword k14 = new Keyword("菅田将暉",2);
-		Keyword k15 = new Keyword("yellow",1);
+		Keyword k13 = new Keyword("鄉村音樂",3);
+		Keyword k14 = new Keyword("kkbox",2);
+		Keyword k15 = new Keyword("情歌",1);
 		keywords.add(k1);
 		keywords.add(k2);
 		keywords.add(k3);
@@ -39,12 +40,7 @@ public class Main {
 		keywords.add(k13);
 		keywords.add(k14);
 		keywords.add(k15);
-		//root node
-
-		//WebTree tree = new WebTree(rootPage);
 		
-		//build childnode
-
 
 		System.out.println("Please input searchkeywords:");
 		Scanner scanner = new Scanner(System.in);
@@ -57,16 +53,38 @@ public class Main {
 			String u = url.get(v);
 			urlset.add(u);
 		}
-		/*ArrayList<Double> count = new ArrayList<Double>();
-		for(int i=0;i<urlset.size();i++) {
-		WebPage webpage=new WebPage(urlset.get(i),);
+		/*for(int i=0;i<4;i++) {
+        suburl HP = new suburl(urlset.get(i));
+        ArrayList<String> hrefList = HP.parser();
+        	for (int j = 0; j < hrefList.size(); j++) {
+        		System.out.println(hrefList.get(j));
+        	}
+		}*/
+		
+		//root node
+		for(int i=0;i<2;i++) {
+			WebPage rootPage = new WebPage(urlset.get(i), "tree"+i);		
+			WebTree tree = new WebTree(rootPage);
+	        suburl HP = new suburl(urlset.get(i));
+	        ArrayList<String> hrefList = HP.parser();
+	        	for (int j = 0; j < hrefList.size(); j++) {
+	        		tree.root.addChild(new WebNode(new WebPage(hrefList.get(j),"Tree"+i+j)));
+
+	        	}
+	        tree.setPostOrderScore(keywords);
+	    	tree.eularPrintTree();
+			}
+		
+		ArrayList<Double> count = new ArrayList<Double>();
+		/*for(int i=0;i<urlset.size();i++) {
+		WebPage webpage=new WebPage(urlset.get(i),keywords.get(1).name);
 		webpage.setScore(keywords);
 		count.add(webpage.score);
 
 		}
-		System.out.println(count);*/
+		System.out.print(count);*/
 
-		
+
 		scanner.close();
 
 		}

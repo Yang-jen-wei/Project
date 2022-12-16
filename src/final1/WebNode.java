@@ -1,7 +1,10 @@
 package final1;
 
+
 import java.io.IOException;
 import java.util.ArrayList;
+
+
 
 public class WebNode {
 	public WebNode parent;
@@ -22,7 +25,9 @@ public class WebNode {
 		nodeScore = webPage.score;		
 		
 		//nodeScore += all children's nodeScore 
-	
+		for(WebNode child : children){
+			nodeScore += child.nodeScore;
+		}		
 
 	}
 	

@@ -80,7 +80,7 @@ public class Google
 				citeUrl = "https://www.google.com/" + citeUrl;
 				retVal.put(title, citeUrl);
 
-			} catch (IndexOutOfBoundsException e) 
+			} catch (Exception e) 
 			{
 //				e.printStackTrace();
 			}
