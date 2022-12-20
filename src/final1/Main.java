@@ -1,10 +1,12 @@
 package final1;
 
 
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+
 
 
 public class Main {
@@ -53,36 +55,28 @@ public class Main {
 			String u = url.get(v);
 			urlset.add(u);
 		}
-		/*for(int i=0;i<4;i++) {
-        suburl HP = new suburl(urlset.get(i));
-        ArrayList<String> hrefList = HP.parser();
-        	for (int j = 0; j < hrefList.size(); j++) {
-        		System.out.println(hrefList.get(j));
-        	}
-		}*/
-		
+
+	
 		//root node
-		for(int i=0;i<2;i++) {
+		Sort lst = new Sort();
+		for(int i=0;i<10;i++) {
 			WebPage rootPage = new WebPage(urlset.get(i), "tree"+i);		
 			WebTree tree = new WebTree(rootPage);
 	        suburl HP = new suburl(urlset.get(i));
 	        ArrayList<String> hrefList = HP.parser();
 	        	for (int j = 0; j < hrefList.size(); j++) {
-	        		tree.root.addChild(new WebNode(new WebPage(hrefList.get(j),"Tree"+i+j)));
+	        		tree.root.addChild(new WebNode(new WebPage(hrefList.get(j),"Tree"+i+"-"+j)));
 
 	        	}
 	        tree.setPostOrderScore(keywords);
-	    	tree.eularPrintTree();
+	    	//tree.eularPrintTree();
+	    	lst.add(new TreeRootList(urlset.get(i), tree.root.nodeScore));
+	    	lst.sort();
 			}
 		
-		ArrayList<Double> count = new ArrayList<Double>();
-		/*for(int i=0;i<urlset.size();i++) {
-		WebPage webpage=new WebPage(urlset.get(i),keywords.get(1).name);
-		webpage.setScore(keywords);
-		count.add(webpage.score);
+		lst.output();
 
-		}
-		System.out.print(count);*/
+
 
 
 		scanner.close();

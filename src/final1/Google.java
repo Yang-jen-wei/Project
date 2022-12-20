@@ -45,6 +45,7 @@ public class Google
 		}
 		return retVal;
 	}
+
 	
 	public HashMap<String, String> query() throws IOException
 	{
@@ -79,6 +80,8 @@ public class Google
 				//put title and pair into HashMap
 				citeUrl = "https://www.google.com/" + citeUrl;
 				retVal.put(title, citeUrl);
+				
+				//if (testFetchContent(citeUrl) ) {}
 
 			} catch (Exception e) 
 			{
