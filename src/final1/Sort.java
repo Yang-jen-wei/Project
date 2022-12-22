@@ -55,7 +55,7 @@ public class Sort {
 	public void output(){
 		StringBuilder sb = new StringBuilder();
 		
-		for(int i = 0; i < lst.size(); i++){
+		for(int i = lst.size()-1; i > 0; i--){
 			System.out.println(lst.get(i).name+" "+lst.get(i).count);
 			/*TreeRootList k = lst.get(i);
 			if(i > 0)sb.append(" ");
