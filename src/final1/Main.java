@@ -62,16 +62,10 @@ public class Main {
 		for(int i=0;i<10;i++) {
 			WebPage rootPage = new WebPage(urlset.get(i), "tree"+i);		
 			WebTree tree = new WebTree(rootPage);
-	        suburl HP = new suburl(urlset.get(i));
-	        ArrayList<String> hrefList = HP.parser();
-	        	for (int j = 0; j < hrefList.size(); j++) {
-	        		tree.root.addChild(new WebNode(new WebPage(hrefList.get(j),"Tree"+i+"-"+j)));
-
-	        	}
-	        tree.setPostOrderScore(keywords);
-	    	//tree.eularPrintTree();
-	    	lst.add(new TreeRootList(urlset.get(i), tree.root.nodeScore));
-	    	lst.sort();
+	       		tree.setPostOrderScore(keywords);
+	    		//tree.eularPrintTree();
+	    		lst.add(new TreeRootList(urlset.get(i), tree.root.nodeScore));
+	    		lst.sort();
 			}
 		
 		lst.output();
