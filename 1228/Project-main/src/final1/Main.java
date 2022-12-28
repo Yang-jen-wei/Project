@@ -54,7 +54,7 @@ public class Main {
 		ArrayList<String> RelativeWords = new Google(searchkeywords).FindRelativeWords();
 		ArrayList<String> InputWords = RelativeWords;
 		InputWords.add(searchkeywords);
-		System.out.println(InputWords);
+//		System.out.println(InputWords);
 		
 		
 		for(var word :InputWords) {
