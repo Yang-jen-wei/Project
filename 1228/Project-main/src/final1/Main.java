@@ -12,13 +12,13 @@ import java.util.Scanner;
 public class Main {
 	public static void main(String[] args) throws IOException {
 		ArrayList<Keyword> keywords = new ArrayList<Keyword>();
-		Keyword k1 = new Keyword("MV",5);
-		Keyword k2 = new Keyword("流行音樂",4);
+		Keyword k1 = new Keyword("youtube",4);
+		Keyword k2 = new Keyword("流行音樂",5);
 		Keyword k3 = new Keyword("歌手",4);
 		Keyword k4 = new Keyword("播放清單",3);
-		Keyword k5 = new Keyword("歌詞",3);
-		Keyword k6 = new Keyword("專輯",3);
-		Keyword k7 = new Keyword("歌",4);
+		Keyword k5 = new Keyword("歌詞",5);
+		Keyword k6 = new Keyword("專輯",5);
+		Keyword k7 = new Keyword("歌曲",10);
 		Keyword k8 = new Keyword("新歌",3);
 		Keyword k9 = new Keyword("鋼琴",2);
 		Keyword k10 = new Keyword("vocal",2);
@@ -28,6 +28,7 @@ public class Main {
 		Keyword k14 = new Keyword("kkbox",2);
 		Keyword k15 = new Keyword("情歌",1);
 		Keyword k16 = new Keyword("wikipedia",-1);
+		Keyword k17 = new Keyword("music",5);
 		keywords.add(k1);
 		keywords.add(k2);
 		keywords.add(k3);
@@ -44,6 +45,7 @@ public class Main {
 		keywords.add(k14);
 		keywords.add(k15);
 		keywords.add(k16);
+		keywords.add(k17);
 		
 
 		System.out.println("Please input searchkeywords:");
