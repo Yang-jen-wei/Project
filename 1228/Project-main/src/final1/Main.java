@@ -71,9 +71,10 @@ public class Main {
 		       		tree.setPostOrderScore(keywords);
 		    		//tree.eularPrintTree();
 		    		lst.add(new TreeRootList(urlset.get(i), tree.root.nodeScore));
+				lst.sort();
 				}
 		}
-		lst.sort();
+		
 		lst.output();
 
 
