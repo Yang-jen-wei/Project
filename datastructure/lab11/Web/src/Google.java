@@ -102,7 +102,7 @@ public class Google
 
 		HashMap<String, String> retVal = new HashMap<String, String>();
 		
-		System.out.println("google");
+//		System.out.println("google");/
 		Document doc = Jsoup.parse(content);
 		
 		//select particular element(tag) which you want 

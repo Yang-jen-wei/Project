@@ -5,7 +5,9 @@
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Scanner;
+import java.util.Map.Entry;
 
 
 
@@ -57,13 +59,13 @@ public class Main {
 		ArrayList<String> InputWords = RelativeWords;
 		InputWords.add(searchkeywords);
 //		System.out.println(InputWords);
-		
+		HashMap<String,String> url=new HashMap<String,String>();
 		
 		for(String word :InputWords) {
-			HashMap<String,String> url=new HashMap<String,String>();
 			url=(HashMap<String, String>) new Google(word).query();
 			for(String v : url.keySet()) {
 				String u = url.get(v);
+//				System.out.println(v);
 				urlset.add(u);
 			}
 			//root node
@@ -73,11 +75,31 @@ public class Main {
 		       		tree.setPostOrderScore(keywords);
 		    		//tree.eularPrintTree();
 		    		lst.add(new TreeRootList(urlset.get(i), tree.root.nodeScore));
-				lst.sort();
+				
 				}
+				
+				lst.sort();
+//				for (int i = lst.lst.size()-1; i>= 0;i--) {
+//						System.out.println(lst.lst.get(i).name);
+//					}
 		}
+		String[][] query = new String[lst.lst.size()][2];
+		for (int i = lst.lst.size()-1; i >= 0 ; i--) {
+			String title;
+			for (Entry<String, String> e : url.entrySet()) {
+				if(lst.lst.get(i).name == e.getValue()) {
+					title =  String.valueOf(e.getKey());
+					query[lst.lst.size()-1-i][0] = title;
+					query[lst.lst.size()-1-i][1] = lst.lst.get(i).name;
+				}
+			}
+		}
+		for (String[] strings : query) {
+			System.out.println(strings[0]);
+		}
+
 		
-		lst.output();
+//		lst.output();
 
 
 

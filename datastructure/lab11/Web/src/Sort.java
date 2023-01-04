@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 public class Sort {
-	private ArrayList<TreeRootList> lst;
+	public ArrayList<TreeRootList> lst;
 	
 	public Sort(){
 		this.lst = new ArrayList<TreeRootList>();
@@ -52,9 +52,7 @@ public class Sort {
 		lst.set(bIndex, temp);
 	}
 	
-	public void output(){
-		StringBuilder sb = new StringBuilder();
-		
+	public void output(){		
 		for(int i = lst.size()-1; i > 0; i--){
 			if(lst.get(i).count >0.01)
 			System.out.println(lst.get(i).name+" "+lst.get(i).count);
