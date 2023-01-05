@@ -1,4 +1,4 @@
-package final1;
+
 
 
 
@@ -12,21 +12,23 @@ import java.util.Scanner;
 public class Main {
 	public static void main(String[] args) throws IOException {
 		ArrayList<Keyword> keywords = new ArrayList<Keyword>();
-		Keyword k1 = new Keyword("熱門",5);
-		Keyword k2 = new Keyword("流行",4);
+		Keyword k1 = new Keyword("youtube",4);
+		Keyword k2 = new Keyword("流行音樂",5);
 		Keyword k3 = new Keyword("歌手",4);
 		Keyword k4 = new Keyword("播放清單",3);
-		Keyword k5 = new Keyword("排行榜",3);
-		Keyword k6 = new Keyword("告示牌",3);
-		Keyword k7 = new Keyword("歌曲",4);
+		Keyword k5 = new Keyword("歌詞",5);
+		Keyword k6 = new Keyword("專輯",5);
+		Keyword k7 = new Keyword("歌曲",10);
 		Keyword k8 = new Keyword("新歌",3);
 		Keyword k9 = new Keyword("鋼琴",2);
-		Keyword k10 = new Keyword("樂器",2);
+		Keyword k10 = new Keyword("vocal",2);
 		Keyword k11 = new Keyword("旋律",2);
-		Keyword k12 = new Keyword("藝人",3);
-		Keyword k13 = new Keyword("鄉村音樂",3);
+		Keyword k12 = new Keyword("管弦",3);
+		Keyword k13 = new Keyword("翻唱",3);
 		Keyword k14 = new Keyword("kkbox",2);
 		Keyword k15 = new Keyword("情歌",1);
+		Keyword k16 = new Keyword("wikipedia",-1);
+		Keyword k17 = new Keyword("music",5);
 		keywords.add(k1);
 		keywords.add(k2);
 		keywords.add(k3);
@@ -42,31 +44,42 @@ public class Main {
 		keywords.add(k13);
 		keywords.add(k14);
 		keywords.add(k15);
+		keywords.add(k16);
+		keywords.add(k17);
 		
 
 		System.out.println("Please input searchkeywords:");
 		Scanner scanner = new Scanner(System.in);
 		String searchkeywords = scanner.next();
 		ArrayList<String> urlset = new ArrayList<String>();
-		HashMap<String,String> url=new HashMap<String,String>();
-		url=(HashMap<String, String>) new Google(searchkeywords).query();
-
-		for(var v : url.keySet()) {
-			String u = url.get(v);
-			urlset.add(u);
-		}
-
-	
-		//root node
+		ArrayList<String> nameset = new ArrayList<String>();
 		Sort lst = new Sort();
-		for(int i=0;i<10;i++) {
-			WebPage rootPage = new WebPage(urlset.get(i), "tree"+i);		
-			WebTree tree = new WebTree(rootPage);
-	       		tree.setPostOrderScore(keywords);
-	    		//tree.eularPrintTree();
-	    		lst.add(new TreeRootList(urlset.get(i), tree.root.nodeScore));
-	    		lst.sort();
+		ArrayList<String> RelativeWords = new Google(searchkeywords).FindRelativeWords();
+		ArrayList<String> InputWords = RelativeWords;
+		InputWords.add(searchkeywords);
+		System.out.print(RelativeWords);
+		
+		
+		for(String word :InputWords) {
+			HashMap<String,String> url=new HashMap<String,String>();
+			url=(HashMap<String, String>) new Google(word).query();
+			for(String v : url.keySet()) {
+				if(!nameset.contains(v)) {
+				String u = url.get(v);
+				urlset.add(u);
+				nameset.add(v);
+				}
 			}
+			//root node
+			for(int i=0;i<10;i++) {
+				WebPage rootPage = new WebPage(urlset.get(i), "tree"+i);		
+				WebTree tree = new WebTree(rootPage);
+		       		tree.setPostOrderScore(keywords);
+		    		//tree.eularPrintTree();
+		    		lst.add(new TreeRootList(urlset.get(i), tree.root.nodeScore , nameset.get(i)));
+				lst.sort();
+				}
+		}
 		
 		lst.output();
 
