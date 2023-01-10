@@ -112,8 +112,8 @@ public class TestProject extends HttpServlet {
 				}
 				WebPage rootPage = new WebPage(urlset.get(i), "tree"+i);		
 				WebTree tree = new WebTree(rootPage);
-		        suburl HP = new suburl(urlset.get(i));
-		        ArrayList<String> hrefList = HP.parser();
+		        	suburl HP = new suburl(urlset.get(i));
+		        	ArrayList<String> hrefList = HP.parser();
 		        	for (int j = 0; j < hrefList.size(); j++) {
 		        		tree.root.addChild(new WebNode(new WebPage(hrefList.get(j),"Tree"+i+"-"+j)));
 		        	}
