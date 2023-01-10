@@ -106,7 +106,7 @@ public class TestProject extends HttpServlet {
 			}
 
 			//root node
-			for(int i=start;i<start+10;i++) {
+			for(int i=start;i<start+20;i++) {
 				if(i>urlset.size()-1){
 					break;
 				}
@@ -118,7 +118,6 @@ public class TestProject extends HttpServlet {
 		        		tree.root.addChild(new WebNode(new WebPage(hrefList.get(j),"Tree"+i+"-"+j)));
 		        	}
 		       	tree.setPostOrderScore(keywords);
-		    	tree.eularPrintTree();
 		    	lst.add(new TreeRootList(urlset.get(i), tree.root.nodeScore , nameset.get(i) ));
 			}
 		}
