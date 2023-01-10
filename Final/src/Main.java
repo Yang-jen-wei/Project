@@ -13,8 +13,8 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		ArrayList<Keyword> keywords = new ArrayList<Keyword>();
 		Keyword k1 = new Keyword("youtube",4);
-		Keyword k2 = new Keyword("流行音樂",5);
-		Keyword k3 = new Keyword("歌手",4);
+		Keyword k2 = new Keyword("音樂",10);
+		Keyword k3 = new Keyword("歌手",5);
 		Keyword k4 = new Keyword("播放清單",3);
 		Keyword k5 = new Keyword("歌詞",5);
 		Keyword k6 = new Keyword("專輯",5);
@@ -27,7 +27,7 @@ public class Main {
 		Keyword k13 = new Keyword("翻唱",3);
 		Keyword k14 = new Keyword("kkbox",2);
 		Keyword k15 = new Keyword("情歌",1);
-		Keyword k16 = new Keyword("wikipedia",-1);
+		Keyword k16 = new Keyword("wikipedia",-2);
 		Keyword k17 = new Keyword("music",5);
 		keywords.add(k1);
 		keywords.add(k2);
@@ -51,19 +51,23 @@ public class Main {
 		System.out.println("Please input searchkeywords:");
 		Scanner scanner = new Scanner(System.in);
 		String searchkeywords = scanner.next();
+		searchkeywords = searchkeywords+"音樂";
 		ArrayList<String> urlset = new ArrayList<String>();
 		ArrayList<String> nameset = new ArrayList<String>();
 		Sort lst = new Sort();
 		ArrayList<String> RelativeWords = new Google(searchkeywords).FindRelativeWords();
 		ArrayList<String> InputWords = RelativeWords;
-		searchkeywords = searchkeywords+ " 音樂";
 		InputWords.add(searchkeywords);
 		System.out.print(RelativeWords);
+
+
 		
 		
 		for(String word :InputWords) {
 			HashMap<String,String> url=new HashMap<String,String>();
 			url=(HashMap<String, String>) new Google(word).query();
+			
+			
 			for(String v : url.keySet()) {
 				if(!nameset.contains(v)) {
 				String u = url.get(v);

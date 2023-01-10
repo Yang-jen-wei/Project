@@ -45,7 +45,7 @@ public class TestProject extends HttpServlet {
 		ArrayList<Keyword> keywords = new ArrayList<Keyword>();
 		Keyword k1 = new Keyword("youtube",4);
 		Keyword k2 = new Keyword("流行音樂",5);
-		Keyword k3 = new Keyword("歌手",4);
+		Keyword k3 = new Keyword("歌手",5);
 		Keyword k4 = new Keyword("播放清單",3);
 		Keyword k5 = new Keyword("歌詞",5);
 		Keyword k6 = new Keyword("專輯",5);
@@ -82,11 +82,17 @@ public class TestProject extends HttpServlet {
 		ArrayList<String> urlset = new ArrayList<String>();
 		ArrayList<String> nameset = new ArrayList<String>();
 		Sort lst = new Sort();
-		ArrayList<String> RelativeWords = new Google(searchkeywords).FindRelativeWords();
+		Translator t=new Translator();
+		try {
+			searchkeywords = t.translate(searchkeywords);
+		}catch(Exception e) {
+			System.out.println(e);
+		}
+		ArrayList<String> RelativeWords = new Google(searchkeywords+"音樂").FindRelativeWords();
 		ArrayList<String> InputWords = RelativeWords;
-		String Inputkeywords = searchkeywords+ "+音樂";
+		String Inputkeywords = searchkeywords+"音樂";
 		InputWords.add(Inputkeywords);
-				
+		
 		for(String word :InputWords) {
 			int start = urlset.size();
 			HashMap<String,String> url=new HashMap<String,String>();
@@ -98,6 +104,7 @@ public class TestProject extends HttpServlet {
 					nameset.add(v);
 				}
 			}
+
 			//root node
 			for(int i=start;i<start+10;i++) {
 				if(i>urlset.size()-1){
@@ -105,8 +112,13 @@ public class TestProject extends HttpServlet {
 				}
 				WebPage rootPage = new WebPage(urlset.get(i), "tree"+i);		
 				WebTree tree = new WebTree(rootPage);
+		        suburl HP = new suburl(urlset.get(i));
+		        ArrayList<String> hrefList = HP.parser();
+		        	for (int j = 0; j < hrefList.size(); j++) {
+		        		tree.root.addChild(new WebNode(new WebPage(hrefList.get(j),"Tree"+i+"-"+j)));
+		        	}
 		       	tree.setPostOrderScore(keywords);
-		    		//tree.eularPrintTree();
+		    	tree.eularPrintTree();
 		    	lst.add(new TreeRootList(urlset.get(i), tree.root.nodeScore , nameset.get(i) ));
 			}
 		}

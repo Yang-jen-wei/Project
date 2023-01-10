@@ -1,6 +1,7 @@
 
 
 import java.io.BufferedReader;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -51,20 +52,18 @@ public class Google
 	public ArrayList<String> FindRelativeWords()throws IOException
 	{
 		ArrayList<String> RelativeWords = new ArrayList<String>();
-		String Inputword = searchKeyword.toUpperCase();
 	        try {
 	            Document doc = Jsoup.connect(url).get();    	//connect to the link
 	            Elements elements = doc.body().getElementsByClass("kjGX2");     //select all elements in the <b>
 	            for (Element ele : elements) {     
 	            	String[] temp = ele.getElementsByTag("div").text().split(" ") ;
 	            	String key = temp[0].replaceAll(" ", "");
-	            	if(!RelativeWords.contains(key) && findLCS(key,searchKeyword)!= searchKeyword.length()) {
-		            	RelativeWords.add(key);			//then add it to RelativeWords
+	            	if(!RelativeWords.contains(key)) {
+		            	RelativeWords.add(key);		//then add it to RelativeWords
 	            		if (RelativeWords.size()==3)
 	        				return RelativeWords;	
 	            	}
-	            }
-	             
+	           }
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
@@ -137,4 +136,6 @@ public class Google
 		}
 		return retVal;
 	}
+
+
 }
