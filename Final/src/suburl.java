@@ -21,8 +21,6 @@ public class suburl {
         URL url = new URL(htmlUrl);           //建立URL物件，建立連線
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setDoOutput(true);
-        String contenttype = connection.getContentType();
-        charSet = getCharset(contenttype);
         InputStreamReader isr = new InputStreamReader(connection.getInputStream(), "gb2312");   //建立輸入流
         BufferedReader br = new BufferedReader(isr);
         String str = null, rs = null;
@@ -52,12 +50,6 @@ public class suburl {
         ArrayList<String> URLList = parser();
     }
 
-    private String getCharset(String str) {  //獲取網頁編碼方式，有些網頁沒有提供，所以暫時不使用
-        Pattern pattern = Pattern.compile("charset=.*");
-        Matcher matcher = pattern.matcher(str);
-        if (matcher.find())
-            return matcher.group(0).split("charset=")[1];
-        return null;
-    }
+
 
 }
