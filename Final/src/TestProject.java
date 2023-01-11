@@ -106,22 +106,21 @@ public class TestProject extends HttpServlet {
 			}
 
 			//root node
-			for(int i=start;i<start+20;i++) {
+			for(int i=start;i<start+50;i++) {
 				if(i>urlset.size()-1){
 					break;
 				}
 				WebPage rootPage = new WebPage(urlset.get(i), "tree"+i);		
 				WebTree tree = new WebTree(rootPage);
-		        	suburl HP = new suburl(urlset.get(i));
-		        	ArrayList<String> hrefList = HP.parser();
+		        suburl HP = new suburl(urlset.get(i));
+		        ArrayList<String> hrefList = HP.parser();
 		        	for (int j = 0; j < hrefList.size(); j++) {
-		        		tree.root.addChild(new WebNode(new WebPage(hrefList.get(j),"Tree"+i+"-"+j)));
+		        		tree.root.addChild(new WebNode(new WebPage(hrefList.get(j),"tree"+i+"-"+j)));
 		        	}
 		       	tree.setPostOrderScore(keywords);
 		    	lst.add(new TreeRootList(urlset.get(i), tree.root.nodeScore , nameset.get(i) ));
 			}
 		}
-		
 		lst.sort();
 		int c = 0;
 		for(int i = lst.lst.size()-1; i > 0; i--){

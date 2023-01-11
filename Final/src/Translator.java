@@ -21,7 +21,8 @@ public class Translator {
   }
 
   public static String translate(String word) throws Exception {
-	  String apiKey = "YOU-API-KEY";//put google api key
+	  String apiKey = "AIzaSyAls3-xBaaNhCQ2wfaP7wrDFVrmAN-yZkg";
+	  //String apiKey = "YOU-API-KEY";
       String url = 
               "https://translation.googleapis.com/language/translate/v2/detect?" +
               	 "key=" + apiKey + "&q=" + URLEncoder.encode(word, "UTF-8");

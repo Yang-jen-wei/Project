@@ -58,15 +58,11 @@ public class Main {
 		ArrayList<String> RelativeWords = new Google(searchkeywords).FindRelativeWords();
 		ArrayList<String> InputWords = RelativeWords;
 		InputWords.add(searchkeywords);
-		System.out.print(RelativeWords);
 
 
-		
-		
 		for(String word :InputWords) {
 			HashMap<String,String> url=new HashMap<String,String>();
 			url=(HashMap<String, String>) new Google(word).query();
-			
 			
 			for(String v : url.keySet()) {
 				if(!nameset.contains(v)) {
@@ -79,11 +75,17 @@ public class Main {
 			for(int i=0;i<10;i++) {
 				WebPage rootPage = new WebPage(urlset.get(i), "tree"+i);		
 				WebTree tree = new WebTree(rootPage);
-		       		tree.setPostOrderScore(keywords);
-		    		//tree.eularPrintTree();
+				suburl HP = new suburl(urlset.get(i));
+			      ArrayList<String> hrefList = HP.parser();
+			      for (int j = 0; j < hrefList.size(); j++) {
+			      	tree.root.addChild(new WebNode(new WebPage(hrefList.get(j),"Tree"+i+"-"+j)));
+			      }
+			       	tree.setPostOrderScore(keywords);
+			       	tree.eularPrintTree();
 		    		lst.add(new TreeRootList(urlset.get(i), tree.root.nodeScore , nameset.get(i)));
 				
 				}
+			
 		}
 		lst.sort();
 		lst.output();
